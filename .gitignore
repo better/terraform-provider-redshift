@@ -1,0 +1,8 @@
+.envrc
+.idea/
+.DS_Store
+pkg
+vendor/
+.terraform*
+terraform.tfstate*
+crash.log

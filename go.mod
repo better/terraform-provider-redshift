@@ -1,4 +1,4 @@
-module terraform-provider-redshift
+module github.com/better/terraform-provider-redshift
 
 go 1.15
 

@@ -51,6 +51,8 @@ func Provider() *schema.Provider {
             "redshift_group":               resourceRedshiftGroup(),
             "redshift_schema":              resourceRedshiftSchema(),
             "redshift_user":                resourceRedshiftUser(),
+            "redshift_user_password":       resourceRedshiftUserPassword(),
+            "redshift_user_password_association": resourceRedshiftUserPasswordAssociation(),
         },
         ConfigureFunc: providerConfigure,
     }

@@ -16,7 +16,7 @@ import (
 
 func getId(d *schema.ResourceData) string {
 	ids := []string{
-		d.Get("name").(string),
+		d.Get("user").(string),
 		d.Get("secret_id").(string),
 	}
 
@@ -66,7 +66,7 @@ func resourceRedshiftUserPasswordAssociation() *schema.Resource {
 func resourceRedshiftUserPasswordAssociationCreate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	name := d.Get("name").(string)
+	username := d.Get("user").(string)
 	secretId := d.Get("secret_id").(string)
 	password, err := getPassword(secretId, getSession())
 
@@ -83,7 +83,7 @@ func resourceRedshiftUserPasswordAssociationCreate(ctx context.Context, d *schem
 	}
 
 
-	alterPasswordStatement := fmt.Sprintf("ALTER USER %s PASSWORD '%s'", name, password)
+	alterPasswordStatement := fmt.Sprintf("ALTER USER %s PASSWORD '%s'", username, password)
 	if _, alterPasswordrErr := tx.Exec(alterPasswordStatement); alterPasswordrErr != nil {
 		log.Println("error | resourceRedshiftUserPasswordAssociationCreate | alterPasswordrErr |", alterPasswordrErr)
 		tx.Rollback()
